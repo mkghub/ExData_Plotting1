@@ -1,0 +1,10 @@
+Sys.setlocale('LC_TIME', 'C')  # To show weekdays etc.in English
+ExData <- read.table("household_power_consumption.txt",sep =";",na.strings="?",header=TRUE)
+ExData$Date <- as.Date(ExData$Date, "%d/%m/%Y")
+ExData2 <- subset(ExData,(Date>="2007-02-01")&(Date<="2007-02-02"))
+ExData2$Time <- strptime(paste(ExData2$Date,ExData2$Time),"%Y-%m-%d %H:%M:%S")
+png("plot1.png", width=480, height=480)
+#par(mfrow=c(1,1))
+hist(ExData2$Global_active_power,main="Glabal Active Power",xlab="Global Active Power(kilowatts)",col="#FF0000",xlim=c(0,6))
+#dev.copy(png,file="plot1.png",width = 480, height = 480)
+dev.off()
